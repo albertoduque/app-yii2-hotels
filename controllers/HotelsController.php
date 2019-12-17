@@ -31,12 +31,25 @@ class HotelsController extends Controller {
 
   public function actionIndex() {
     return new ActiveDataProvider([
-        'query' => Hotels::find(),
+      'query' => Hotels::find(),
     ]);
   }
 
   public function actionView($id){
     return Hotels::findOne($id);
+  }
+
+  public function actionCreate() {
+    
+    $model = new Hotels();
+
+    if ($model->load(Yii::$app->request->post())) {
+      if($model->validate()) {
+        $model->save();
+        return ['response' => 'Ok'];
+      }
+      return ['response' => 'faild'];
+    }
   }
 
 }
