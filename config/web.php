@@ -57,7 +57,7 @@ $config = [
           'rules' => [
             ['class' => 'yii\rest\UrlRule', 'controller' => 'hotels'],
             ['class' => 'yii\rest\UrlRule', 'controller' => 'cities'],
-        ],
+          ],
         ],
     ],
     'params' => $params,
