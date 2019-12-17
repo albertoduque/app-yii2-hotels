@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use yii\rest\Controller;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
@@ -40,16 +41,20 @@ class HotelsController extends Controller {
   }
 
   public function actionCreate() {
-    
     $model = new Hotels();
+    
+    $model->name = Yii::$app->request->getBodyParam('name');
+    $model->city_id = Yii::$app->request->getBodyParam('city_id');
+    $model->nit = Yii::$app->request->getBodyParam('nit');
+    $model->address = Yii::$app->request->getBodyParam('address');
+    $model->rooms = Yii::$app->request->getBodyParam('rooms');
 
-    if ($model->load(Yii::$app->request->post())) {
-      if($model->validate()) {
-        $model->save();
-        return ['response' => 'Ok'];
-      }
-      return ['response' => 'faild'];
+    if($model->validate()) {
+      $model->save();
+      return ['response' => 'Ok'];
     }
+    return ['response' => 'faild'];
+    
   }
 
 }
